@@ -11,7 +11,7 @@ def addGameRecord(event, context):
 
     ranking = ranking_service.addGameRecord(newGameRecord)
 
-    return response.ok(json.dumps(ranking.toJson()))
+    return response.created(json.dumps(ranking.toJson()))
 
 
 def top10(event, context):
