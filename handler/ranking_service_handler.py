@@ -3,7 +3,7 @@ import json
 from model.game_record import GameRecord
 from service import ranking_service
 
-from controller import response
+from handler import response
 
 
 def addGameRecord(event, context):

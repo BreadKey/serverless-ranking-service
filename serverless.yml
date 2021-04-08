@@ -32,7 +32,7 @@ provider:
     user: ${self:custom.secret.db.user}
     password: ${self:custom.secret.db.password}
     database: ${self:custom.secret.db.database}
-    
+
 # you can overwrite defaults here
 #  stage: dev
 #  region: us-east-1
@@ -68,7 +68,7 @@ provider:
 functions:
   addGameRecord:
     handler:
-      controller/ranking_service_controller.addGameRecord
+      handler/ranking_service_handler.addGameRecord
     events:
       - http:
           path: ranking
@@ -76,14 +76,14 @@ functions:
 
   top10:
     handler:
-      controller/ranking_service_controller.top10
+      handler/ranking_service_handler.top10
     events:
       - http:
           path: ranking/{game}/top10
           method: get
   my:
     handler:
-      controller/ranking_service_controller.my
+      handler/ranking_service_handler.my
     events:
       - http:
           path: ranking/{game}/{userId}
