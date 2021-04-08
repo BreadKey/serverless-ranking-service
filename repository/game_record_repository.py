@@ -1,9 +1,10 @@
-import pymysql
 import os
-from model.game_record import GameRecord
 from typing import List
 
-rankingDb = pymysql.connect(
+import pymysql
+from model.game_record import GameRecord
+
+__RANKING_DB = pymysql.connect(
     host=os.environ["host"],
     user=os.environ["user"],
     port=int(os.environ["port"]),
@@ -13,17 +14,17 @@ rankingDb = pymysql.connect(
 
 
 def save(gameRecord: GameRecord) -> GameRecord:
-    with rankingDb.cursor() as cursor:
+    with __RANKING_DB.cursor() as cursor:
         cursor.execute(
             f'insert into GameRecords (game, userId, score) values("{gameRecord.game}", "{gameRecord.userId}", {gameRecord.score})')
         id = cursor.lastrowid
-        rankingDb.commit()
+        __RANKING_DB.commit()
 
     return GameRecord(gameRecord.game, gameRecord.userId, gameRecord.score, id)
 
 
 def findByGameOrderByScoreDesc(game: str, count: int) -> List[GameRecord]:
-    with rankingDb.cursor(pymysql.cursors.DictCursor) as cursor:
+    with __RANKING_DB.cursor(pymysql.cursors.DictCursor) as cursor:
         cursor.execute(
             f'select * from GameRecords where game = "{game}" order by score desc limit {count}')
 
@@ -31,7 +32,7 @@ def findByGameOrderByScoreDesc(game: str, count: int) -> List[GameRecord]:
 
 
 def findTopByGameAndUserId(game: str, userId: str) -> GameRecord:
-    with rankingDb.cursor(pymysql.cursors.DictCursor) as cursor:
+    with __RANKING_DB.cursor(pymysql.cursors.DictCursor) as cursor:
         cursor.execute(
             f'select * from GameRecords where game = "{game}" and userId = "{userId}" order by score desc limit 1'
         )

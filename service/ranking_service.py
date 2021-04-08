@@ -3,11 +3,11 @@ from model.game_record import GameRecord
 from repository import game_record_repository
 from typing import List
 
-max_ranking_number = 1000
+__MAX_RANKING_NUMBER = 1000
 
 def addGameRecord(gameRecord: GameRecord) -> Ranking:
     savedGameRecord = game_record_repository.save(gameRecord)
-    orderByScoreDesc = game_record_repository.findByGameOrderByScoreDesc(gameRecord.game, max_ranking_number)
+    orderByScoreDesc = game_record_repository.findByGameOrderByScoreDesc(gameRecord.game, __MAX_RANKING_NUMBER)
 
     rankingNumber: int = __calculateRankingNumber(orderByScoreDesc, savedGameRecord)
 
@@ -23,7 +23,7 @@ def my(game: str, userId: str) -> Ranking:
 
     if (myTopRecord is None): return None
 
-    orderByScoreDesc = game_record_repository.findByGameOrderByScoreDesc(game, max_ranking_number)
+    orderByScoreDesc = game_record_repository.findByGameOrderByScoreDesc(game, __MAX_RANKING_NUMBER)
 
     rankingNumber: int = __calculateRankingNumber(orderByScoreDesc, myTopRecord)
 

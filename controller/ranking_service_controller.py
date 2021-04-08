@@ -1,8 +1,9 @@
 import json
+
 from model.game_record import GameRecord
-from model.ranking import Ranking
-from controller import response
 from service import ranking_service
+
+from controller import response
 
 
 def addGameRecord(event, context):
