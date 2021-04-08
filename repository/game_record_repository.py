@@ -70,8 +70,7 @@ def __selectBuilder(
     query += f' from {entity.__name__}s '
 
     if (len(where) > 0):
-        query += "where "
-        query += " and ".join(
+        query += "where " + " and ".join(
             list(
                 map(lambda key:
                     f'{key} = ' +
