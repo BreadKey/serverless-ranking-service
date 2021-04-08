@@ -32,7 +32,7 @@ provider:
     user: ${self:custom.secret.db.user}
     password: ${self:custom.secret.db.password}
     database: ${self:custom.secret.db.database}
-
+    
 # you can overwrite defaults here
 #  stage: dev
 #  region: us-east-1
@@ -143,6 +143,7 @@ functions:
 
 plugins:
   - serverless-python-requirements
+  - serverless-offline
 custom:
   pythonRequirements:
     dockerizePip: non-linux

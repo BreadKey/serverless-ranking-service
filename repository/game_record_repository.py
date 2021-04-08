@@ -8,7 +8,7 @@ __RANKING_DB = pymysql.connect(
     host=os.environ["host"],
     user=os.environ["user"],
     port=int(os.environ["port"]),
-    passwd=os.environ["password"],
+    passwd=os.environ.get("password", ""),
     db=os.environ["database"]
 )
 
