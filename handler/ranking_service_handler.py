@@ -15,7 +15,6 @@ def addGameRecord(event, context):
 
 
 def top10(event, context):
-    print(event)
     game = __getPathParameter(event, "game")
 
     return response.ok(json.dumps([ranking.toJson() for ranking in ranking_service.top10(game)]))
